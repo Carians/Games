@@ -1,0 +1,15 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <title>Giercownia v1</title>
+    <link rel="stylesheet" href="{% static 'main/main.css' %}">
+</head>
+<body>
+    <main>
+        <header>Giercownia</header>
+        {% include 'main/games.html' %}
+    </main>
+</body>
+</html>
