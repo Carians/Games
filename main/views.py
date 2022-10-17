@@ -5,7 +5,7 @@ from django.views.generic import View
 # Create your views here.
 class homePageView(View):
     def get(self, request):
-        return render(request, 'main/homepage.html')
+        return render(request, 'main/main.html')
 
 #class lobbyView():
 #    pass
