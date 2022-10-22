@@ -3,7 +3,13 @@
 <html lang="pl">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Giercownia v1</title>
+
+    <!--Bootstrap-->
+    <link rel="stylesheet" href="{% static 'main/bootstrap/css/bootstrap.min.css' %}" >  
+    <script src="{% static 'main/bootstrap/js/bootstrap.min.js' %}"></script>  
+
     <link rel="stylesheet" href="{% static 'main/main.css' %}">
 </head>
 <body>
@@ -11,6 +17,21 @@
         <div class="container">
             <header>Giercownia</header>
             {% include 'main/games.html' %}
+
+            <form action="/save" method="post">  
+                <div class="form-group">  
+                  <label for="email">Email address:</label>  
+                  <input type="email" class="form-control" id="email">  
+                </div>  
+                <div class="form-group">  
+                  <label for="pwd">Password:</label>  
+                  <input type="password" class="form-control" id="pwd">  
+                </div>  
+                <div class="checkbox">  
+                  <label><input type="checkbox"> Remember me</label>  
+                </div>  
+                <button type="submit" class="btn btn-primary">Submit</button>  
+              </form>
         </div>
     </main>
 </body>
