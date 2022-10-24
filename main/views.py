@@ -3,6 +3,7 @@ from django.http import HttpResponse
 from django.views.generic import View
 
 from .models import Games
+from .metadata import getMetaData
 
 # Create your views here.
 class homePageView(View):
@@ -11,6 +12,7 @@ class homePageView(View):
         return render(request, 'main/main.html', {
             'games': games
         })
+
 
 #class lobbyView():
 #    pass
