@@ -12,5 +12,3 @@ class homePageView(View):
             'games': games
         })
 
-#class lobbyView():
-#    pass
