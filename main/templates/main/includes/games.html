@@ -1,12 +1,14 @@
 <div class="container">
-    {% for game in games %}
-        <div class="game">
-            <h2>{{game.title}}</h2>
-            <div class="text">
-                <p>{{game.description}}</p>
-                <br>
-                <p>{{game.text}}</p>
-            </div>
-        </div>
-    {% endfor %}
+    <div class="d-grid gap-3">
+        {% for game in games %}
+            <section class="card d-flex flex-row bg-secondary">
+                <img src="..." class="card-img-left" alt="...">
+                <article class="card-body pb-1">
+                    <h2>{{game.title}}</h2>
+                    <p>{{game.description}}</p>
+                    <p>{{game.text}}</p>
+                </article>
+            </section>
+        {% endfor %}
+    </div>
 </div>
