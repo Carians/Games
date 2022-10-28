@@ -1,2 +1,5 @@
 .idea
 main/__pycache__
+games/__pycache__/
+/.DS_STORE
+main/migrations/__pycache__/
