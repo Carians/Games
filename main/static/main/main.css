@@ -10,3 +10,14 @@ main{
     overflow: hidden;
 }
 
+.dropdown:hover .dropdown-menu {
+    display: block;
+    margin-top: 0;
+}
+  .dropdown .dropdown-menu {
+    display: none;
+}
+  .dropdown:hover .dropdown-toggle::after {
+    border-bottom: 0.3em solid;
+    border-top: 0;
+}
