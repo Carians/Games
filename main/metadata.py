@@ -8,9 +8,9 @@ class getMetaData():
             page = metadata_parser.MetadataParser(url=str(url), search_head_only=True)
             title = page.get_metadatas('title')
             return title[0]
-        except:
-            pass
-        return None
+        except Exception as e:
+            print('error metadata: '+e)
+            return None
 
 
     def image(url):
@@ -18,9 +18,9 @@ class getMetaData():
             page = metadata_parser.MetadataParser(url=str(url), search_head_only=True)
             image = page.get_metadatas('image')
             return image[0]
-        except:
-            pass
-        return None
+        except Exception as e:
+            print('error metadata: '+e)
+            return None
 
     def all(url):
         try:

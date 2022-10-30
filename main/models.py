@@ -1,5 +1,7 @@
 from django.utils import timezone
 from django.db.models.signals import post_save, pre_save
+from django.core.validators import URLValidator
+from django.core.exceptions import ValidationError
 from django.db import models
 from .metadata import getMetaData
 
@@ -17,8 +19,13 @@ class Games(models.Model):
         return f'{self.title} {self.description}'
 
 def games_pre_save(sender, instance,  *args, **kwargs):
-    instance.imgURL = getMetaData.image(str(instance.link))
-    instance.title = getMetaData.title(str(instance.link))
+    validator = URLValidator()
+    try:
+        validator(str(instance.link))
+        instance.imgURL = getMetaData.image(str(instance.link))
+        instance.title = getMetaData.title(str(instance.link))
+    except ValidationError as exception:
+        print(exception)
 
 pre_save.connect(games_pre_save, sender=Games)
 
