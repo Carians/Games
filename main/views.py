@@ -1,9 +1,8 @@
 from django.shortcuts import render
 from django.http import HttpResponse
-from django.views.generic import View
+from django.views.generic import View, ListView
 
 from .models import Games
-from .metadata import getMetaData
 
 # Create your views here.
 class homePageView(View):
@@ -14,3 +13,8 @@ class homePageView(View):
         })
 
 
+class libraryView(ListView):
+    template_name = 'main/library.html'
+    model = Games
+    ordering = ['date']
+    context_object_name = 'games'

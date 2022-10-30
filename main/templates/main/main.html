@@ -1,32 +1,22 @@
+{% extends 'main/layout/layout.html' %}
 {% load static %}
-<!DOCTYPE html>
-<html lang="pl">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Giercownia v1</title>
-    
 
-    <!--Bootstrap-->
-    <link rel="stylesheet" href="{% static 'main/bootstrap/css/bootstrap.min.css' %}" >  
-    <script src="{% static 'main/bootstrap/js/popper.min.js' %}" defer></script>  
-    <script src="{% static 'main/bootstrap/js/bootstrap.min.js' %}" defer></script>  
-    
-    
-    <!--Icons-->
-    <link rel="stylesheet" href="{% static 'main/bootstrap/icons/bootstrap-icons.css' %}">
+{% block title %}
+    Giercownia v1
+{% endblock title %}
 
+{% block css %}
     <link rel="stylesheet" href="{% static 'main/main.css' %}">
-</head>
-<body>
+{% endblock css %}
+
+{% block content %}
     <main>
         <div class="d-flex h-100 justify-content-center align-items-center">
-            <div class="text-light rounded-3" style='width:80%; height:100vh; background-color: #242324;'>
+            <div class="text-light rounded-3" style='height:100vh;'>
                 {% include 'main/includes/header.html' %}
 
                 {% include 'main/includes/games.html' %}
             </div>
         </div>
     </main>
-</body>
-</html>
+{% endblock  %}
