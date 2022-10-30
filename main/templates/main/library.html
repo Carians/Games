@@ -1,0 +1,23 @@
+{% extends 'main/layout/layout.html' %}
+{% load static %}
+
+{% block title %}
+    Biblioteka
+{% endblock title %}
+
+{% block css %}
+    <link rel="stylesheet" href="{% static 'main/library.css' %}">
+    <link rel="stylesheet" href="{% static 'main/includes/scrollbar.css' %}">
+{% endblock css %}
+
+{% block content %}
+    <main>
+        <div class="d-flex h-100 justify-content-center align-items-center">
+            <div class="text-light rounded-3" style='height:100vh;'>
+                {% include 'main/includes/header.html' %}
+
+                {% include 'main/includes/games.html' %}
+            </div>
+        </div>
+    </main>
+{% endblock  %}

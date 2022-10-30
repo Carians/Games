@@ -1,5 +1,4 @@
 from django.shortcuts import render
-from django.http import HttpResponse
 from django.views.generic import View, ListView
 
 from .models import Games
@@ -16,5 +15,5 @@ class homePageView(View):
 class libraryView(ListView):
     template_name = 'main/library.html'
     model = Games
-    ordering = ['date']
+    ordering = ['date_created']
     context_object_name = 'games'
