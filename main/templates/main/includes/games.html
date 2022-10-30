@@ -1,13 +1,15 @@
 
-    <div class="games d-grid gap-3">
-        {% for game in games %}
-            <section class="card d-flex flex-row bg-secondary">
-                <img src="{{game.imgURL}}" class="card-img-left img-thumbnail border-secondary bg-secondary" alt="...">
-                <article class="card-body pb-1">
-                    <h2>{{game.title}}</h2>
-                    <p>{{game.description}}</p>
-                    <p>{{game.text}}</p>
-                </article>
-            </section>
-        {% endfor %}
+    <div class="scroll-bg d-grid gap-3">
+        <div class="scroll-div">
+            {% for game in games %}
+                <section class="card d-flex flex-row bg-secondary mb-3">
+                    <img src="{{game.imgURL}}" class="card-img-left img-thumbnail border-secondary bg-secondary" alt="...">
+                    <article class="card-body pb-1">
+                        <h2>{{game.title}}</h2>
+                        <p>{{game.description}}</p>
+                        <p>{{game.text}}</p>
+                    </article>
+                </section>
+            {% endfor %}
+        </div>
     </div>
