@@ -21,3 +21,7 @@ main{
     border-bottom: 0.3em solid;
     border-top: 0;
 }
+
+.bg-tile{
+  background-color: rgb(80, 80, 80);
+}

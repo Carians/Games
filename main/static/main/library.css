@@ -28,3 +28,7 @@ main{
     overflow: hidden;
     overflow-y: scroll;
 }
+
+.card{
+    text-decoration: none;
+}

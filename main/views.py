@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from django.views.generic import View, ListView
+from django.views.generic import View, ListView, DetailView
 
 from .models import Games
 
@@ -17,3 +17,9 @@ class libraryView(ListView):
     model = Games
     ordering = ['date_created']
     context_object_name = 'games'
+
+
+class singleGameView(DetailView):
+    template_name = 'main/detail_game.html'
+    model = Games
+    context_object_name = 'game'
