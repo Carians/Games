@@ -11,12 +11,15 @@
 
 {% block content %}
     <main>
-        <div class="d-flex h-100 justify-content-center align-items-center">
-            <div class="text-light rounded-3" style='height:100vh;'>
+        <div class="d-flex justify-content-center align-items-center">
+            <div class="text-light rounded-3 w-75 h-100">
                 {% include 'main/includes/header.html' %}
 
-                <div class="container bg-dark ">
-                    <h1>Detail</h1>
+                <div class="container bg-secondary bg-gradient">
+                    <section class="d-flex flex-column justify-content-center align-items-center">
+                        <h2>{{game.title}}</h2>
+                        <img src="{{game.imgURL}}" alt='game image'>
+                    </section>
                 </div>
             </div>
         </div>
