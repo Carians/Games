@@ -2,7 +2,7 @@
 {% load static %}
 
 {% block title %}
-    Giercownia v1
+    {{game.title}}
 {% endblock title %}
 
 {% block css %}
@@ -12,10 +12,15 @@
 {% block content %}
     <main>
         <div class="d-flex justify-content-center align-items-center">
-            <div class="text-light rounded-3" style='height:100vh;'>
+            <div class="text-light rounded-3 w-75 h-100">
                 {% include 'main/includes/header.html' %}
 
-                {% include 'main/includes/games.html' %}
+                <div class="container bg-secondary bg-gradient">
+                    <section class="d-flex flex-column justify-content-center align-items-center">
+                        <h2>{{game.title}}</h2>
+                        <img src="{{game.imgURL}}" alt='game image'>
+                    </section>
+                </div>
             </div>
         </div>
     </main>
