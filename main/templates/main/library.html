@@ -12,19 +12,18 @@
 
 {% block content %}
     <main>
-        <div class="d-flex justify-content-center align-items-center h-100">
-            <div class="text-light rounded-3 h-100" style='width:80vw;'>
+        <div class="d-flex justify-content-center align-items-center">
+            <div class="text-light rounded-3" style='width:80vw;'>
                 {% include 'main/includes/header.html' %}
 
-                <div class="scroll-bg d-grid w-100">
-                    <div class="scroll-div row row-cols-3">
-                        {% for game in games %}
-                            <a href="{% url 'main:game_detail' game.pk %}" class="hovered d-flex justify-content-center align-items-center col p-0 mb-2">
-                                <img src="{{game.imgURL}}" class="img-thumbnail border-secondary bg-secondary" alt="..." style='width:85%;'>
-                            </a>
-                        {% endfor %}
-                    </div>
+                <div class="scroll-div row row-cols-3">
+                    {% for game in games %}
+                        <a href="{% url 'main:game_detail' game.pk %}" class="hovered d-flex justify-content-center align-items-center col p-0 mb-4">
+                            <img src="{{game.imgURL}}" class="img-thumbnail border-secondary bg-secondary" alt="..." style='width:85%;'>
+                        </a>
+                    {% endfor %}
                 </div>
+
                 
             </div>
         </div>
