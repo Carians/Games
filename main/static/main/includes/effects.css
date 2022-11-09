@@ -1,8 +1,17 @@
 /* CSS for layout.html */
-.card{
+.hovered{
+    cursor: default;
     text-decoration: none;
 } 
 
-.card:hover{
+.hovered:hover{
     opacity: 0.9;
+}
+
+.hovered > *{
+    cursor: pointer;
+}
+
+.no-decoration{
+    text-decoration: none;
 }

@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from django.views.generic import View, ListView, DetailView
 
+
 from .models import Games
 
 # Create your views here.
@@ -23,3 +24,8 @@ class singleGameView(DetailView):
     template_name = 'main/detail_game.html'
     model = Games
     context_object_name = 'game'
+
+
+class ErrorView(View): # 404 template
+    def get(self, request):
+        return render(request, 'main/includes/404.html')
