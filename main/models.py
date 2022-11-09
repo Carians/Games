@@ -22,8 +22,30 @@ def games_pre_save(sender, instance,  *args, **kwargs):
     validator = URLValidator()
     try:
         validator(str(instance.link))
-        instance.imgURL = getMetaData.image(str(instance.link))
-        instance.title = getMetaData.title(str(instance.link))
+        if not instance.imgURL:
+            instance.imgURL = getMetaData.image(str(instance.link))
+        if not instance.title:
+            instance.title = getMetaData.title(str(instance.link))
+            #Remove words from title instance
+            banned_words = [
+                'on Steam',
+                'Save',
+                'on',
+                     ]
+            for i in range(len(banned_words)):
+                instance.title = instance.title.replace(banned_words[i], '')
+            #Remove save {ammount}%
+            limit = 0
+            if '%' in instance.title:
+                position = instance.title.find('%')
+                print(instance.title[position])
+                while instance.title[position-1].isdigit() and limit <= 100:
+                    instance.title = instance.title.replace(instance.title[position-1], '')
+                    position = instance.title.find('%')
+                    limit+=1
+                instance.title = instance.title.replace('%', '')
+                limit = 0
+
     except ValidationError as exception:
         print(exception)
 
