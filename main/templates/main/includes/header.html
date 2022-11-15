@@ -23,10 +23,12 @@ bg-dark rounded-bottom mb-3">
     <h2 class="p-4">Giercownia - your games database</h2>
   </section>
 
-  <section class="me-4">
-    <label for="search">Search</label>
-    <input type="text" class="formControl rounded-2">
-  </section>
+  {% if is_searchable %}
+    <section class="me-4">
+      <label for="search">Search</label>
+      <input type="text" class="search formControl rounded-2" onkeyup="search_func()">
+    </section>
+  {% endif %}
 
 </header>
 
