@@ -32,6 +32,7 @@ def games_pre_save(sender, instance,  *args, **kwargs):
                 'on Steam',
                 'Save',
                 'on',
+                'Pre-purchase',
                      ]
             for i in range(len(banned_words)):
                 instance.title = instance.title.replace(banned_words[i], '')
