@@ -37,3 +37,21 @@ class GamesListCreateAPIView(generics.ListCreateAPIView):
 
     # def perform_create(self, serializer):
 
+class GamesDeleteAPIView(generics.DestroyAPIView):
+    queryset = Games.objects.all()
+    serializer_class = GameSerializer
+
+    lookup_field = 'pk'
+    def perform_destroy(self, instance):
+        super().perform_destroy(instance)
+
+class GamesUpdateAPIView(generics.UpdateAPIView):
+    queryset = Games.objects.all()
+    serializer_class = GameSerializer
+    permission_classes = [permissions.DjangoModelPermissions]
+
+    lookup_field = 'pk'
+
+class GamesDetailAPIView(generics.RetrieveAPIView):
+    queryset = Games.objects.all()
+    serializer_class = GameSerializer
