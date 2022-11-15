@@ -38,6 +38,13 @@ class GamesListCreateAPIView(generics.ListCreateAPIView):
     # def perform_create(self, serializer):
 
 class GamesDeleteAPIView(generics.DestroyAPIView):
+    permission_classes = [permissions.IsAdminUser, IsStaffEditorPermission]
+
+    authentication_classes = [
+        authentication.SessionAuthentication,
+        TokenAuthentication,
+    ]
+
     queryset = Games.objects.all()
     serializer_class = GameSerializer
 
@@ -46,6 +53,13 @@ class GamesDeleteAPIView(generics.DestroyAPIView):
         super().perform_destroy(instance)
 
 class GamesUpdateAPIView(generics.UpdateAPIView):
+    permission_classes = [permissions.IsAdminUser, IsStaffEditorPermission]
+
+    authentication_classes = [
+        authentication.SessionAuthentication,
+        TokenAuthentication,
+    ]
+
     queryset = Games.objects.all()
     serializer_class = GameSerializer
     permission_classes = [permissions.DjangoModelPermissions]
@@ -53,5 +67,12 @@ class GamesUpdateAPIView(generics.UpdateAPIView):
     lookup_field = 'pk'
 
 class GamesDetailAPIView(generics.RetrieveAPIView):
+    permission_classes = [permissions.IsAdminUser, IsStaffEditorPermission]
+
+    authentication_classes = [
+        authentication.SessionAuthentication,
+        TokenAuthentication,
+    ]
+
     queryset = Games.objects.all()
     serializer_class = GameSerializer
