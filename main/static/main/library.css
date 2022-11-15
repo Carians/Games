@@ -5,6 +5,7 @@ html, body {
 
 main{
     width: 100%;
+    min-height: 100vh;
     background: url('/static/main/images/background_image.jpg');
     overflow: hidden;
 }
