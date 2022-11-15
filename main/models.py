@@ -4,6 +4,7 @@ from django.core.validators import URLValidator
 from django.core.exceptions import ValidationError
 from django.db import models
 from .metadata import getMetaData
+import datetime
 
 # Create your models here.
 
@@ -11,7 +12,7 @@ class Games(models.Model):
     title = models.CharField(max_length=150, null=False, blank=True)
     description = models.TextField(null=True, blank=True)
     text = models.TextField(null=True, blank=True)
-    date_created = models.DateField(default=timezone.now, blank=False, null=False)
+    date_created = models.DateField(default=datetime.date.today, blank=False, null=False)
     link = models.URLField(max_length=200, null=False, blank=False)
     imgURL = models.URLField(default='', blank=True, null=True)
 
