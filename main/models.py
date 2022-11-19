@@ -13,6 +13,9 @@ class Games(models.Model):
     description = models.TextField(null=True, blank=True)
     text = models.TextField(null=True, blank=True)
     date_created = models.DateField(default=datetime.date.today, blank=False, null=False)
+    views = models.IntegerField(default=0)
+    up_vote = models.IntegerField(default=0)
+    down_vote = models.IntegerField(default=0)
     link = models.URLField(max_length=200, null=False, blank=False)
     imgURL = models.URLField(default='', blank=True, null=True)
 
