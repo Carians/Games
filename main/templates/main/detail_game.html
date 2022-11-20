@@ -9,6 +9,7 @@
 <link rel="stylesheet" href="{% static 'main/library.css' %}">
 <link rel="stylesheet" href="{% static 'main/includes/scrollbar.css' %}">
 <script type="text/javascript" src="{% static 'main/includes/scripts/rating.js' %}" defer></script>
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 
 {% endblock css %}
 
@@ -50,7 +51,7 @@
                                 </div>
                                 <div class="row">
                                     <div class="col text-center">
-                                        <p>Liczba wyświetleń: 12</p>
+                                        <p id='views'>Liczba wyświetleń: 12</p>
                                     </div>
                                 </div>
                             </div>
