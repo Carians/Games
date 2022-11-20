@@ -6,21 +6,60 @@
 {% endblock title %}
 
 {% block css %}
-    <link rel="stylesheet" href="{% static 'main/main.css' %}">
+<link rel="stylesheet" href="{% static 'main/library.css' %}">
+<link rel="stylesheet" href="{% static 'main/includes/scrollbar.css' %}">
+<script type="text/javascript" src="{% static 'main/includes/scripts/rating.js' %}" defer></script>
+
 {% endblock css %}
 
 {% block content %}
     <main>
         <div class="d-flex justify-content-center align-items-center">
-            <div class="text-light rounded-3 w-75 h-100">
+            <div class="text-light w-75 h-100">
                 {% include 'main/includes/header.html' %}
 
-                <div class="container bg-secondary bg-gradient">
-                    <section class="d-flex flex-column justify-content-center align-items-center">
-                        <h2>{{game.title}}</h2>
-                        <img src="{{game.imgURL}}" alt='game image'>
-                    </section>
-                </div>
+                <section class="scroll-div">
+                    <div class="row d-flex justify-content-center mt-2 mb-4">
+                        <div class="bg-dark bg-gradient col-4 min-vh-100 rounded-2 me-4">
+                            <h2 class='text-center mt-2'>{{game.title}}</h2>
+                            <img class="img-fluid rounded-2 mt-4" src="{{game.imgURL}}" alt='game image'>
+                            <div class="d-grid rounded-3 mt-4 pt-2 pb-4" style='background-color: #28487a'>
+                                <div class="row">
+                                    <div class="col d-flex justify-content-center align-items-center">
+                                        <h2>Ocena: 7.2</h2>
+                                    </div>
+                                    <div class="col">
+                                        <div class="rating d-flex flex-row p-4">
+                                            <div class="star-icon" id='star0'>
+                                                <h1><i class="bi bi-star"></i></h1>
+                                            </div>
+                                            <div class="star-icon" id='star1'>
+                                                <h1><i class="bi bi-star"></i></h1>
+                                            </div>
+                                            <div class="star-icon" id='star2'>
+                                                <h1><i class="bi bi-star"></i></h1>
+                                            </div>
+                                            <div class="star-icon" id='star3'>
+                                                <h1><i class="bi bi-star"></i></h1>
+                                            </div>
+                                            <div class="star-icon" id='star4'>
+                                                <h1><i class="bi bi-star"></i></h1>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col text-center">
+                                        <p>Liczba wyświetleń: 12</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="bg-dark bg-gradient col-7 min-vh-100 rounded-2 ms-4">
+                            <p class="fw-lighter mt-2">{{game.text}}</p>
+                        </div>
+                    </div>
+                </section>
             </div>
         </div>
     </main>
