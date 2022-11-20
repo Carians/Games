@@ -24,21 +24,11 @@ for(let icon of icons){
 let views = document.querySelector('#views')
 let token = ''
 
-axios.post('/api/auth/', {
-    username: 'michal',
-    password: 'michal'
+
+axios.get('/api/games', {
 })
 .then(function (response) {
-    console.log(response)
-    token = response.data.token
-    console.log(token)
-    axios.get('/api/games', {
-        headers: {
-            Authorization: `Bearer ${token}`
-        }
-    })
-    .then(function (response) {
-        console.log(response);
-    })
+    console.log(response);
 })
+
 
