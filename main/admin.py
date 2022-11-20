@@ -9,7 +9,7 @@ class GamesAdmin(admin.ModelAdmin):
     ordering = ['date_created']
 
 class GamesReviewAdmin(admin.ModelAdmin):
-    list_display = ['owner', 'gameName', 'rate']
+    list_display = ['owner', 'gameName', 'rate', 'date_created']
     ordering = ['date_created']
 
 admin.site.register(Games, GamesAdmin),
