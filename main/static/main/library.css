@@ -31,3 +31,6 @@ main{
     text-decoration: none;
 }
 
+.star-icon:hover{
+    cursor: pointer;
+}

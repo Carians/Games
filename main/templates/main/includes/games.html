@@ -3,11 +3,10 @@
         <div class="scroll-div">
             {% for game in games %}
                 <a href="{% url 'main:game_detail' game.pk %}" class=" hovered card d-flex flex-row text-white bg-secondary bg-gradient h-25 mb-3">
-                    <img src="{{game.imgURL}}" class="card-img-left p-1 " alt="...">
+                    <img src="{{game.imgURL}}" class="card-img-left rounded-4 p-1 " alt="...">
                     <article class="card-body pb-1">
-                        <h2>{{game.title}}</h2>
+                        <h2 class='text-center'>{{game.title}}</h2>
                         <p>{{game.description}}</p>
-                        <p>{{game.text}}</p>
                     </article>
                 </a>
             {% endfor %}
