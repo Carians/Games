@@ -34,6 +34,14 @@ class singleGameView(DetailView):
     model = Games
     context_object_name = 'game'
 
+    #On view call incement views in Games model
+    def get_object(self, queryset=None):
+        pk = self.kwargs.get('pk')
+        game_object = Games.objects.get(pk=pk)
+        game_object.views=game_object.views+1
+        game_object.save()
+        #Games.objects.get(pk=self.kwargs.get('pk')).update
+        #print(self.kwargs.get('pk'))
 
 class ErrorView(View): # 404 template
     def get(self, request):
