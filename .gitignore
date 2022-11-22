@@ -4,7 +4,7 @@
 .DS_STORE
 .main/migrations/__pycache__
 ./__pycache__
-db.sqllite3
+db.sqlite3
 
 # Django #
 *.log
