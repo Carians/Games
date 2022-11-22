@@ -1,11 +1,6 @@
-from django.utils import timezone
-from django.db.models.signals import post_save, pre_save
-from django.core.validators import URLValidator, MinValueValidator, MaxValueValidator
-from django.core.exceptions import ValidationError
+from django.core.validators import MinValueValidator, MaxValueValidator
 from django.contrib.auth.models import User
 from django.db import models
-from django.db.models import Avg
-from .metadata import getMetaData
 import datetime
 # Create your models here.
 
@@ -35,59 +30,3 @@ class GamesReview(models.Model):
 
     class Meta:
         unique_together = ['owner', 'gameName']
-
-def games_review_pre_save(sender, instance, *args, **kwargs):
-    try:
-        gameName = instance.gameName_id
-        ratio = GamesReview.objects.all().filter(gameName_id=gameName).aggregate(Avg('rate'))
-        Games.objects.filter(pk=gameName).update(reviewRatio=ratio.get('rate__avg'))
-    except Exception as e:
-        print('Error: game review avg counting failed.')
-        print(e)
-
-post_save.connect(games_review_pre_save, sender=GamesReview)
-
-def games_review_post_save(sender, instance, created, *args, **kwargs):
-    if created:
-        instance.save()
-
-post_save.connect(games_review_post_save, sender=GamesReview)
-
-def games_pre_save(sender, instance,  *args, **kwargs):
-    validator = URLValidator()
-    try:
-        validator(str(instance.link))
-        if not instance.imgURL:
-            instance.imgURL = getMetaData.image(str(instance.link))
-        if not instance.title:
-            instance.title = getMetaData.title(str(instance.link))
-            #Remove words from title instance
-            banned_words = [
-                'on Steam',
-                'Save',
-                'on',
-                'Pre-purchase',
-                     ]
-            for i in range(len(banned_words)):
-                instance.title = instance.title.replace(banned_words[i], '')
-            #Remove save {ammount}%
-            limit = 0
-            if '%' in instance.title:
-                position = instance.title.find('%')
-                print(instance.title[position])
-                while instance.title[position-1].isdigit() and limit <= 100:
-                    instance.title = instance.title.replace(instance.title[position-1], '')
-                    position = instance.title.find('%')
-                    limit+=1
-                instance.title = instance.title.replace('%', '')
-                limit = 0
-
-    except ValidationError as exception:
-        print(exception)
-
-pre_save.connect(games_pre_save, sender=Games)
-
-def games_post_save(sender, instance,  created, *args, **kwargs):
-    if created:
-        instance.save()
-post_save.connect(games_post_save, sender=Games)
