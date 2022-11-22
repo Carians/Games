@@ -20,14 +20,17 @@ let rects = { // positions of stars
 for(let icon of icons){
     icon.addEventListener('mouseover', (e)=>{
         resetIcons(icons)
-
         let icon_id = icon.id[4]
         
         for(let i=0; i<=icon_id; i++){
             icons[i].innerHTML = fill_icon_html
         }
+        // click check
+        if(e.buttons == 1){
+            let rate = parseInt(icon_id) + 1
+            console.log(rate)
+        }
     })
-
 }
 
 star_col.addEventListener('mouseover', (e) =>{
