@@ -10,6 +10,12 @@ main{
     overflow: hidden;
 }
 
+img {
+    display: block;
+    max-width: 100%;
+    height: auto;
+  }
+
 .dropdown:hover .dropdown-menu {
     display: block;
     margin-top: 0;
