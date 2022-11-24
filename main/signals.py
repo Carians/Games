@@ -12,7 +12,8 @@ def games_review_pre_save(sender, instance, *args, **kwargs):
     try:
         gameName = instance.gameName_id
         ratio = GamesReview.objects.all().filter(gameName_id=gameName).aggregate(Avg('rate'))
-        Games.objects.filter(pk=gameName).update(reviewRatio=ratio.get('rate__avg'))
+        print(ratio)
+        Games.objects.filter(pk=gameName).update(reviewRatio=float(ratio.get('rate__avg')))
     except Exception as e:
         print('Error: game review avg counting failed.')
         print(e)
