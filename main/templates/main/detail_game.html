@@ -8,6 +8,8 @@
 {% block css %}
 <link rel="stylesheet" href="{% static 'main/library.css' %}">
 <link rel="stylesheet" href="{% static 'main/includes/scrollbar.css' %}">
+<link rel="stylesheet" href="{% static 'main/includes/text_responsive.css' %}">
+
 <script type="text/javascript" src="{% static 'main/includes/scripts/rating.js' %}" defer></script>
 <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 
@@ -21,16 +23,16 @@
 
                 <section class="scroll-div">
                     <div class="row d-flex justify-content-center mt-2 mb-4">
-                        <div class="bg-dark bg-gradient col-4 min-vh-100 rounded-2 me-4">
+                        <div class="bg-dark bg-gradient col-xl-4 col-md-5 rounded-2 me-xl-4 mb-xl-0 me-md-4 mb-3 p-2 pb-3">
                             <h2 class='text-center mt-2'>{{game.title}}</h2>
                             <img class="img-fluid rounded-2 mt-4" src="{{game.imgURL}}" alt='game image'>
                             <div id='stars' class="d-grid rounded-3 mt-4 pt-2 pb-4" style='background-color: #28487a'>
                                 <div class="row">
                                     <div class="col d-flex justify-content-center align-items-center">
-                                        <h2>Ocena: {{game.reviewRatio}}</h2>
+                                        <h2 class='ms-3'>Ocena: {{game.reviewRatio}}</h2>
                                     </div>
                                     <div class="col">
-                                        <div class="rating d-flex flex-row p-4">
+                                        <div class="rating d-flex flex-row justify-content-center p-4">
                                             <div class="star-icon" id='star0'>
                                                 <h1><i class="bi bi-star"></i></h1>
                                             </div>
@@ -56,7 +58,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="bg-dark bg-gradient col-7 min-vh-100 rounded-2 ms-4">
+                        <div class="bg-dark bg-gradient col-xl-7 col-md-6 rounded-2 ms-xl-4 me-md-2">
                             <p class="fw-lighter mt-2">{{game.text}}</p>
                         </div>
                     </div>
