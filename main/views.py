@@ -82,7 +82,7 @@ class GamesUpdateAPIView(generics.UpdateAPIView):
     permission_classes = [permissions.IsAdminUser, IsStaffEditorPermission]
 
     authentication_classes = [
-        authentication.SessionAuthentication,
+        #authentication.SessionAuthentication,
         TokenAuthentication,
     ]
 
@@ -93,7 +93,7 @@ class GamesUpdateAPIView(generics.UpdateAPIView):
     lookup_field = 'pk'
     def perform_update(self, serializer):
         link = serializer.validated_data.get('link')
-        if self.request.link is None:
+        if not self.request.link:
             self.request.link = link
         serializer.save()
 

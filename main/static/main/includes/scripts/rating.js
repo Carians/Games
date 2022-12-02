@@ -14,7 +14,6 @@ function sendRate(rate){
     let id = window.location.pathname[9]
     let token = '515ce0e46051419e97830acb233a0f945d1e43d5'
 
-    //TODO POST TEZ NIE DZIALA 
     // axios.post('http://127.0.0.1:8000/api/games/6/', {
     // })
     // .then((res) => console.log(res))
@@ -26,7 +25,7 @@ function sendRate(rate){
             'Authorization': 'Bearer ' + token
         },
         body: JSON.stringify({
-          title: 'Axios is a piece of crap'  
+            reviewRatio: rate  
         })
     })
     .then(res => {
