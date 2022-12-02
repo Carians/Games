@@ -9,6 +9,33 @@ function resetIcons(icons){
     }
 }
 
+
+function sendRate(rate){
+    let id = window.location.pathname[9]
+    let token = '515ce0e46051419e97830acb233a0f945d1e43d5'
+
+    //TODO POST TEZ NIE DZIALA 
+    // axios.post('http://127.0.0.1:8000/api/games/6/', {
+    // })
+    // .then((res) => console.log(res))
+    // .catch((err) => console.log(err))
+    fetch(`http://127.0.0.1:8000/api/games/${id}/update`, {
+        method: 'PUT',
+        headers: {
+            'Content-Type': 'application/json',
+            'Authorization': 'Bearer ' + token
+        },
+        body: JSON.stringify({
+          title: 'Axios is a piece of crap'  
+        })
+    })
+    .then(res => {
+        return res.json()
+    })
+    .then(data => console.log(data))
+    .catch(err => console.log(err))
+}
+
 let rects = { // positions of stars
     left: icons[0].getBoundingClientRect().left,
     right: icons[4].getBoundingClientRect().right,
@@ -28,7 +55,7 @@ for(let icon of icons){
         // click check
         if(e.buttons == 1){
             let rate = parseInt(icon_id) + 1
-            console.log(rate)
+            sendRate(rate)
         }
     })
 }
