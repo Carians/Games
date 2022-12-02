@@ -91,6 +91,12 @@ class GamesUpdateAPIView(generics.UpdateAPIView):
     permission_classes = [permissions.DjangoModelPermissions]
 
     lookup_field = 'pk'
+    def perform_update(self, serializer):
+        link = serializer.validated_data.get('link')
+        if self.request.link is None:
+            self.request.link = link
+        serializer.save()
+
 
 class GamesDetailAPIView(generics.RetrieveAPIView):
     permission_classes = [permissions.IsAdminUser, IsStaffEditorPermission]
