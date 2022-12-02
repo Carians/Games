@@ -12,7 +12,9 @@ function resetIcons(icons){
 
 function sendRate(rate){
     let id = window.location.pathname[9]
-    let token = '515ce0e46051419e97830acb233a0f945d1e43d5'
+    const token = '515ce0e46051419e97830acb233a0f945d1e43d5'
+    
+    const csrf_token = document.cookie.split('=')[1]
 
     // axios.post('http://127.0.0.1:8000/api/games/6/', {
     // })
@@ -22,7 +24,8 @@ function sendRate(rate){
         method: 'PUT',
         headers: {
             'Content-Type': 'application/json',
-            'Authorization': 'Bearer ' + token
+            'Authorization': 'Bearer ' + token,
+            'X-CSRF-TOKEN': csrf_token
         },
         body: JSON.stringify({
             reviewRatio: rate  

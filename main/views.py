@@ -93,10 +93,10 @@ class GamesUpdateAPIView(generics.UpdateAPIView):
     lookup_field = 'pk'
     def perform_update(self, serializer):
         try:
-            link = serializer.validated_data.get('link')
+            link = self.request.link
             if self.request.link is None:
                 self.request.link = link
-            serializer.save()
+            serializer.save(link=self.request.link)
         except NameError:
             print('Variable link does not exist')
 
