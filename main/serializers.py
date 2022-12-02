@@ -13,3 +13,13 @@ class GameSerializer(serializers.ModelSerializer):
         #     "imgURL"
         # ]
         fields = '__all__'
+class GamePUTSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Games
+        fields = [
+            "title",
+            "description",
+            "date_created",
+            "link",
+            "imgURL"
+        ]

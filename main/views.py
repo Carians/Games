@@ -4,7 +4,7 @@ from django.views.generic import View, ListView, DetailView
 from rest_framework import generics, authentication, permissions
 #
 from .models import Games
-from .serializers import GameSerializer
+from .serializers import GameSerializer, GamePUTSerializer
 from .permissions import IsStaffEditorPermission
 from api.authentication import TokenAuthentication
 
@@ -82,23 +82,17 @@ class GamesUpdateAPIView(generics.UpdateAPIView):
     permission_classes = [permissions.IsAdminUser, IsStaffEditorPermission]
 
     authentication_classes = [
-        #authentication.SessionAuthentication,
+        authentication.SessionAuthentication,
         TokenAuthentication,
     ]
 
     queryset = Games.objects.all()
-    serializer_class = GameSerializer
-    permission_classes = [permissions.DjangoModelPermissions]
+    serializer_class = GamePUTSerializer
 
     lookup_field = 'pk'
     def perform_update(self, serializer):
-        try:
-            link = self.request.link
-            if self.request.link is None:
-                self.request.link = link
-            serializer.save(link=self.request.link)
-        except NameError:
-            print('Variable link does not exist')
+        serializer.save()
+
 
 
 class GamesDetailAPIView(generics.RetrieveAPIView):
