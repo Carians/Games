@@ -18,8 +18,8 @@ class GamePUTSerializer(serializers.ModelSerializer):
         model = Games
         fields = [
             "title",
+            "text",
             "description",
             "date_created",
-            "link",
             "imgURL"
         ]
