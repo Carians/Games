@@ -9,7 +9,7 @@ class Games(models.Model):
     description = models.TextField(null=True, blank=True, max_length=500)
     text = models.TextField(null=True, blank=True, max_length=500)
     date_created = models.DateField(default=datetime.date.today, blank=False, null=False, editable=False)
-    link = models.URLField(max_length=200, null=False, blank=True)
+    link = models.URLField(max_length=200, null=False, blank=False)
     imgURL = models.URLField(default='', blank=True, null=True)
     views = models.IntegerField(default=0)
     reviewRatio = models.FloatField(default=0)

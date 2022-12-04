@@ -2,11 +2,11 @@ from django.shortcuts import render
 from django.views.generic import View, ListView, DetailView
 
 from rest_framework import generics, authentication, permissions
+from api.mixins import StaffEditorPermissionMixin
 #
 from .models import Games
 from .serializers import GameSerializer, GamePUTSerializer
 from .permissions import IsStaffEditorPermission
-from api.authentication import TokenAuthentication
 
 # Create your views here.
 class homePageView(View):
@@ -49,27 +49,20 @@ class ErrorView(View): # 404 template
     def get(self, request):
         return render(request, 'main/includes/404.html')
 
-class GamesListCreateAPIView(generics.ListCreateAPIView):
-
-    permission_classes = [permissions.IsAdminUser, IsStaffEditorPermission]
-
-    authentication_classes = [
-        authentication.SessionAuthentication,
-        TokenAuthentication,
-        ]
+class GamesListCreateAPIView(
+    StaffEditorPermissionMixin,
+    generics.ListCreateAPIView,
+):
 
     queryset = Games.objects.all()
     serializer_class = GameSerializer
 
     # def perform_create(self, serializer):
 
-class GamesDeleteAPIView(generics.DestroyAPIView):
-    permission_classes = [permissions.IsAdminUser, IsStaffEditorPermission]
-
-    authentication_classes = [
-        authentication.SessionAuthentication,
-        TokenAuthentication,
-    ]
+class GamesDeleteAPIView(
+    generics.DestroyAPIView,
+    StaffEditorPermissionMixin
+                            ):
 
     queryset = Games.objects.all()
     serializer_class = GameSerializer
@@ -78,13 +71,10 @@ class GamesDeleteAPIView(generics.DestroyAPIView):
     def perform_destroy(self, instance):
         super().perform_destroy(instance)
 
-class GamesUpdateAPIView(generics.UpdateAPIView):
+class GamesUpdateAPIView(generics.UpdateAPIView,
+                        StaffEditorPermissionMixin
+                         ):
     permission_classes = [permissions.IsAdminUser, IsStaffEditorPermission]
-
-    authentication_classes = [
-        authentication.SessionAuthentication,
-        TokenAuthentication,
-    ]
 
     queryset = Games.objects.all()
     serializer_class = GamePUTSerializer
@@ -95,13 +85,9 @@ class GamesUpdateAPIView(generics.UpdateAPIView):
 
 
 
-class GamesDetailAPIView(generics.RetrieveAPIView):
-    permission_classes = [permissions.IsAdminUser, IsStaffEditorPermission]
-
-    authentication_classes = [
-        authentication.SessionAuthentication,
-        TokenAuthentication,
-    ]
+class GamesDetailAPIView(generics.RetrieveAPIView,
+                         StaffEditorPermissionMixin
+                         ):
 
     queryset = Games.objects.all()
     serializer_class = GameSerializer
