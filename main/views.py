@@ -4,8 +4,8 @@ from django.views.generic import View, ListView, DetailView
 from rest_framework import generics, authentication, permissions
 from api.mixins import StaffEditorPermissionMixin
 #
-from .models import Games
-from .serializers import GameSerializer, GamePUTSerializer
+from .models import Games, GamesReview
+from .serializers import GameSerializer, GamePUTSerializer, GameReviewSerializer
 from .permissions import IsStaffEditorPermission
 
 # Create your views here.
@@ -91,3 +91,51 @@ class GamesDetailAPIView(generics.RetrieveAPIView,
 
     queryset = Games.objects.all()
     serializer_class = GameSerializer
+
+class GamesReviewListCreateAPIView(
+    StaffEditorPermissionMixin,
+    generics.ListCreateAPIView,
+):
+    def get_queryset(self, *args, **kwargs):
+        return GamesReview.objects.all().filter(owner=self.request.user)
+
+    serializer_class = GameReviewSerializer
+
+    # def perform_create(self, serializer):
+
+class GamesReviewDeleteAPIView(
+    generics.DestroyAPIView,
+    StaffEditorPermissionMixin
+                            ):
+
+    def get_queryset(self, *args, **kwargs):
+        return GamesReview.objects.all().filter(owner=self.request.user)
+
+    serializer_class = GameReviewSerializer
+
+    lookup_field = 'pk'
+    def perform_destroy(self, instance):
+        super().perform_destroy(instance)
+
+class GamesReviewUpdateAPIView(generics.UpdateAPIView,
+                        StaffEditorPermissionMixin
+                         ):
+
+    def get_queryset(self, *args, **kwargs):
+        return GamesReview.objects.all().filter(owner=self.request.user)
+    serializer_class = GameReviewSerializer
+
+    def perform_update(self, serializer):
+        serializer.save()
+
+
+
+class GamesReviewDetailAPIView(generics.RetrieveAPIView,
+                         StaffEditorPermissionMixin
+                         ):
+
+    def get_queryset(self, *args, **kwargs):
+        return GamesReview.objects.all().filter(owner=self.request.user)
+    serializer_class = GameReviewSerializer
+
+

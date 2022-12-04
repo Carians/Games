@@ -32,6 +32,7 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    'corsheaders',
     "rest_framework_simplejwt",
     'rest_framework.authtoken',
     'rest_framework',
@@ -48,6 +49,7 @@ INSTALLED_APPS = [
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
@@ -56,6 +58,10 @@ MIDDLEWARE = [
 ]
 
 ROOT_URLCONF = 'games.urls'
+CORS_URLS_REGEX = r"/api/.*"
+CORS_ALLOWED_ORIGINS = [
+    'http://localhost:8000',
+]
 
 TEMPLATES = [
     {
@@ -144,7 +150,9 @@ REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': auth_classes,
     'DEFAULT_PERMISSIONS_CLASSES': [
         'rest_framework.permissions.IsAuthenticatedOrReadOnly'
-    ]
+    ],
+    'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.LimitOffsetPagination',
+    'PAGE_SIZE': 100,
 }
 
 SIMPLE_JWT: {
