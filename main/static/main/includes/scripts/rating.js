@@ -9,6 +9,23 @@ function resetIcons(icons){
     }
 }
 
+function getAuthToken(){
+    const csrf_token = document.cookie.split('=')[1]
+    let credentials = {
+        username: 'michal',
+        password: 'michal'
+    }
+
+    fetch(`http://127.0.0.1:8000/api/auth/`, {
+        method: 'POST',
+        headers: {
+            'X-CSRFToken': csrf_token
+        },
+    })
+    .then(res => console.log(res))
+}
+getAuthToken()
+
 
 function sendRate(rate){
     let id = window.location.pathname[9]
@@ -25,10 +42,10 @@ function sendRate(rate){
         headers: {
             'Content-Type': 'application/json',
             'Authorization': 'Bearer ' + token,
-            'X-CSRF-TOKEN': csrf_token
+            'X-CSRFToken': csrf_token
         },
         body: JSON.stringify({
-            reviewRatio: rate  
+            title: 'CHanged title'
         })
     })
     .then(res => {
@@ -76,10 +93,10 @@ let views = document.querySelector('#views')
 let token = ''
 
 
-axios.get('/api/games', {
-})
-.then(function (response) {
-    console.log(response);
-})
+// axios.get('/api/games', {
+// })
+// .then(function (response) {
+//     console.log(response);
+// })
 
 
