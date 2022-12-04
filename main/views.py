@@ -97,7 +97,6 @@ class GamesReviewListCreateAPIView(
     generics.ListCreateAPIView,
 ):
     def get_queryset(self, *args, **kwargs):
-        print(self.request.user)
         return GamesReview.objects.all().filter(owner=self.request.user)
 
     serializer_class = GameReviewSerializer
