@@ -9,10 +9,18 @@ class GameReviewSerializer(serializers.ModelSerializer):
         model = GamesReview
         fields = '__all__'
 
+
+class GameReviewInLineSerializer(serializers.HyperlinkedModelSerializer):
+    url = serializers.HyperlinkedIdentityField(
+        view_name='gamesreview-detail',
+        lookup_field='owner',
+        read_only=True
+    )
+
 class GameSerializer(serializers.ModelSerializer):
     review_ratio = serializers.SerializerMethodField(read_only=True)
 
-    #user_rate = serializers.SerializerMethodField(read_only=True)
+    #user_rate = GameReviewInLineSerializer( read_only=True,many=True)
 
     class Meta:
 
@@ -21,6 +29,7 @@ class GameSerializer(serializers.ModelSerializer):
             "title",
             "description",
             "text",
+            #"user_rate",
             "date_created",
             "review_ratio",
             "link",
