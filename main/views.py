@@ -108,6 +108,8 @@ class GamesReviewDeleteAPIView(
     StaffEditorPermissionMixin
                             ):
 
+    lookup_field = 'gameName'
+
     def get_queryset(self, *args, **kwargs):
         return GamesReview.objects.all().filter(owner=self.request.user)
 

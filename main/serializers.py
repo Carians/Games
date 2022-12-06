@@ -1,26 +1,29 @@
 from rest_framework import serializers
 from django.db.models import Avg
 from .models import Games, GamesReview
-#from  api.serializers import UserPublicSerializer
 
 class GameReviewSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = GamesReview
-        fields = '__all__'
+        fields = [
+            'gameName',
+            'rate',
+            'date_created'
+        ]
 
-
-class GameReviewInLineSerializer(serializers.HyperlinkedModelSerializer):
-    url = serializers.HyperlinkedIdentityField(
-        view_name='gamesreview-detail',
-        lookup_field='owner',
-        read_only=True
-    )
+class GameReviewHyperlink(serializers.HyperlinkedModelSerializer):
+    class Meta:
+        model = GamesReview
+        fields= '__all__'
 
 class GameSerializer(serializers.ModelSerializer):
     review_ratio = serializers.SerializerMethodField(read_only=True)
-
-    #user_rate = GameReviewInLineSerializer( read_only=True,many=True)
+    user_rate = serializers.HyperlinkedRelatedField(
+        many=True,
+        read_only=True,
+        view_name='gamesreview-detail:main',
+    )
 
     class Meta:
 
@@ -29,7 +32,7 @@ class GameSerializer(serializers.ModelSerializer):
             "title",
             "description",
             "text",
-            #"user_rate",
+            "user_rate",
             "date_created",
             "review_ratio",
             "link",
