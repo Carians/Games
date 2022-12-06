@@ -42,21 +42,43 @@ function sendRate(rate){
     
     const csrf_token = document.cookie.split('=')[1]
 
-    axios(`http://127.0.0.1:8000/api/games/${id}/update`, {
+    // axios({
+    //     method: 'put',
+    //     url: `http://127.0.0.1:8000/api/gamesreview/${id}/update`,
+    //     data: {
+    //         reviewRatio: rate
+    //     },
+    //     config: { headers: {
+    //         'Content-Type': 'application/json',
+    //         'X-CSRFToken': csrf_token 
+    //     }}
+    //   })
+    // .then(res => {
+    //     return res.json()
+    // })
+    // .then(data => {
+    //     console.log(data)}
+    // )
+    // .catch(err => console.log(err))
+
+    fetch(`http://127.0.0.1:8000/api/gamesreview/${id}/update`, {
         method: 'PUT',
         headers: {
-            'Content-Type': 'application/json',
+            "Content-Type" : "application/x-www-form-urlencoded",
             // 'Authorization': 'Bearer ' + token,
             'X-CSRFToken': csrf_token
         },
         body: JSON.stringify({
-            reviewRatio: rate
+            owner: 'michal',
+            rate: rate
         })
     })
     .then(res => {
-        return res
+        return res.json()
     })
-    .then(data => console.log(data))
+    .then(data => {
+        console.log(data)}
+    )
     .catch(err => console.log(err))
 }
 
