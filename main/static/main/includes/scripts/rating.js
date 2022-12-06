@@ -22,34 +22,39 @@ function getAuthToken(){
             'X-CSRFToken': csrf_token
         },
     })
-    .then(res => console.log(res))
+    .then(response => console.log(response))
 }
-getAuthToken()
+
+
+function handleAuthData(authData, callback) {
+    localStorage.setItem('access', authData.access)
+    localStorage.setItem('refresh', authData.refresh)
+    console.log(localStorage)
+    if (callback){
+        callback()
+    }
+}
 
 
 function sendRate(rate){
     let id = window.location.pathname[9]
-    const token = '515ce0e46051419e97830acb233a0f945d1e43d5'
+    // const token = '515ce0e46051419e97830acb233a0f945d1e43d5'
     
     const csrf_token = document.cookie.split('=')[1]
 
-    // axios.post('http://127.0.0.1:8000/api/games/6/', {
-    // })
-    // .then((res) => console.log(res))
-    // .catch((err) => console.log(err))
-    fetch(`http://127.0.0.1:8000/api/games/${id}/update`, {
+    axios(`http://127.0.0.1:8000/api/games/${id}/update`, {
         method: 'PUT',
         headers: {
             'Content-Type': 'application/json',
-            'Authorization': 'Bearer ' + token,
+            // 'Authorization': 'Bearer ' + token,
             'X-CSRFToken': csrf_token
         },
         body: JSON.stringify({
-            title: 'CHanged title'
+            reviewRatio: rate
         })
     })
     .then(res => {
-        return res.json()
+        return res
     })
     .then(data => console.log(data))
     .catch(err => console.log(err))
