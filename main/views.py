@@ -91,10 +91,13 @@ class GamesReviewListCreateAPIView(
     StaffEditorPermissionMixin,
     generics.ListCreateAPIView,
 ):
+    lookup_field = 'gameName'
     def get_queryset(self, *args, **kwargs):
         return GamesReview.objects.all().filter(owner=self.request.user)
 
+
     serializer_class = GameReviewSerializer
+    #lookup_field = 'gameName'
 
     # def perform_create(self, serializer):
 
