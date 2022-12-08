@@ -88,15 +88,13 @@ class GamesDetailAPIView(generics.RetrieveAPIView,
     serializer_class = GameSerializer
 
 class GamesReviewListCreateAPIView(
-    StaffEditorPermissionMixin,
     generics.ListCreateAPIView,
+    StaffEditorPermissionMixin,
 ):
     def get_queryset(self, *args, **kwargs):
         return GamesReview.objects.all().filter(owner=self.request.user)
 
     serializer_class = GameReviewSerializer
-
-    # def perform_create(self, serializer):
 
 class GamesReviewDeleteAPIView(
     generics.DestroyAPIView,
