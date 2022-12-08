@@ -5,7 +5,7 @@ from rest_framework import generics, authentication, permissions
 from api.mixins import StaffEditorPermissionMixin
 #
 from .models import Games, GamesReview
-from .serializers import GameSerializer, GamePUTSerializer, GameReviewSerializer
+from .serializers import GameSerializer, GamePUTSerializer, GameReviewSerializer, GameReviewPUTSerializer
 from .permissions import IsStaffEditorPermission
 
 # Create your views here.
@@ -123,7 +123,7 @@ class GamesReviewUpdateAPIView(generics.UpdateAPIView,
 
     def get_queryset(self, *args, **kwargs):
         return GamesReview.objects.all().filter(owner=self.request.user)
-    serializer_class = GameReviewSerializer
+    serializer_class = GameReviewPUTSerializer
 
 class GamesReviewDetailAPIView(generics.RetrieveAPIView,
                          StaffEditorPermissionMixin
