@@ -13,6 +13,6 @@ urlpatterns = [
     path('api/games/<int:pk>/', views.GamesDetailAPIView.as_view()),
     path('api/gamesreview', views.GamesReviewListCreateAPIView.as_view(), name="gamesreview"),
     path('api/gamesreview/<int:gameName>/update', views.GamesReviewUpdateAPIView.as_view(), name="gamesreview-update"),
-    path('api/gamesreview/<int:pk>/delete', views.GamesReviewDeleteAPIView.as_view(), name="gamesreview-delete"),
+    path('api/gamesreview/<int:gameName>/delete', views.GamesReviewDeleteAPIView.as_view(), name="gamesreview-delete"),
     path('api/gamesreview/<int:gameName>/', views.GamesReviewDetailAPIView.as_view(), name="gamesreview-detail"),
 ]
