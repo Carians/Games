@@ -4,23 +4,10 @@ from django.core.validators import URLValidator
 from django.core.exceptions import ValidationError
 from .models import Games, GamesReview
 from .metadata import getMetaData
-from django.db.models import Avg
-from django.db import IntegrityError, transaction
 
 
 @receiver(pre_save, sender=GamesReview)
 def games_review_pre_save(sender, instance, *args, **kwargs):
-    #To be deleted. This code was made to update reviewRatio on GamesReview model. But this is no longer used.
-        # try:
-        #     gameName = instance.gameName_id
-        #     with transaction.atomic():
-        #         ratio = GamesReview.objects.all().filter(gameName_id=gameName).aggregate(Avg('rate'))
-        #         Games.objects.filter(pk=gameName).update(reviewRatio=ratio.get('rate__avg'))
-        # except IntegrityError:
-        #     print(f'Failed to count rate fo game id:{gameName}.')
-    # except Exception as e:
-    #     print('Error: game review avg counting failed.')
-    #     print(e)
     pass
 
 @receiver(post_save, sender=GamesReview)

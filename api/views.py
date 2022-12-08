@@ -1,12 +1,12 @@
-from django.shortcuts import render
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
-from main.serializers import GameSerializer
+from rest_framework.reverse import reverse
+import json
 
 # Create your views here.
-@api_view(['POST'])
+@api_view(['GET'])
 def api_home(request, *args, **kwargs):
-    data = request.data
-    serializer = GameSerializer
-    if serializer.is_valid(raise_exception=True):
-        return Response(serializer.data)
+    return Response({
+        'games': reverse('main:games', request=request),
+        'gamesreviews': reverse('main:gamesreview', request=request),
+    })

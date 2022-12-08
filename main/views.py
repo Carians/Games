@@ -42,9 +42,6 @@ class singleGameView(DetailView):
         game_object.save()
         return game_object
 
-        #Games.objects.get(pk=self.kwargs.get('pk')).update
-        #print(self.kwargs.get('pk'))
-
 class ErrorView(View): # 404 template
     def get(self, request):
         return render(request, 'main/includes/404.html')
@@ -56,8 +53,6 @@ class GamesListCreateAPIView(
 
     queryset = Games.objects.all()
     serializer_class = GameSerializer
-
-    # def perform_create(self, serializer):
 
 class GamesDeleteAPIView(
     generics.DestroyAPIView,
@@ -115,7 +110,7 @@ class GamesReviewDeleteAPIView(
 
     serializer_class = GameReviewSerializer
 
-    lookup_field = 'pk'
+    lookup_field = 'gameName'
     def perform_destroy(self, instance):
         super().perform_destroy(instance)
 
@@ -124,14 +119,10 @@ class GamesReviewUpdateAPIView(generics.UpdateAPIView,
                          ):
 
     lookup_field = 'gameName'
+
     def get_queryset(self, *args, **kwargs):
         return GamesReview.objects.all().filter(owner=self.request.user)
     serializer_class = GameReviewSerializer
-
-    def perform_update(self, serializer):
-        serializer.save()
-
-
 
 class GamesReviewDetailAPIView(generics.RetrieveAPIView,
                          StaffEditorPermissionMixin
