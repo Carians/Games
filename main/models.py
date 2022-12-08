@@ -17,7 +17,7 @@ class Games(models.Model):
         return f'{self.title} {self.description}'
 
 class GamesReview(models.Model):
-    owner = models.ForeignKey(User, on_delete=models.CASCADE, null=False)
+    owner = models.ForeignKey(User, on_delete=models.CASCADE, null=False, editable=False)
     gameName = models.ForeignKey(Games, on_delete=models.CASCADE, null=False, default='')
     rate = models.IntegerField(default=0, validators=[
         MinValueValidator(1),

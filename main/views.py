@@ -88,8 +88,8 @@ class GamesDetailAPIView(generics.RetrieveAPIView,
     serializer_class = GameSerializer
 
 class GamesReviewListCreateAPIView(
-    StaffEditorPermissionMixin,
     generics.ListCreateAPIView,
+    StaffEditorPermissionMixin,
 ):
     lookup_field = 'gameName'
     def get_queryset(self, *args, **kwargs):
@@ -98,8 +98,6 @@ class GamesReviewListCreateAPIView(
 
     serializer_class = GameReviewSerializer
     #lookup_field = 'gameName'
-
-    # def perform_create(self, serializer):
 
 class GamesReviewDeleteAPIView(
     generics.DestroyAPIView,

@@ -7,6 +7,7 @@ class GameReviewSerializer(serializers.ModelSerializer):
     class Meta:
         model = GamesReview
         fields = [
+            'owner',
             'gameName',
             'rate',
             'date_created'
