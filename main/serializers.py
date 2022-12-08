@@ -13,6 +13,14 @@ class GameReviewSerializer(serializers.ModelSerializer):
             'date_created'
         ]
 
+class GameReviewPUTSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = GamesReview
+        fields = [
+            'rate'
+        ]
+
 class GameReviewHyperlink(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = GamesReview
