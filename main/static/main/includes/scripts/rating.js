@@ -10,7 +10,7 @@ setRate()
 
 function sendRate(rate){
     const id = window.location.pathname[9]
-    // const token = '515ce0e46051419e97830acb233a0f945d1e43d5'
+    let rate_element = document.querySelector('#rate')
     
     const csrf_token = document.cookie.split('=')[1]
 
@@ -29,6 +29,18 @@ function sendRate(rate){
         return res.json()
     })
     .catch(err => console.log(err))
+
+    fetch(`http://127.0.0.1:8000/api/games/${id}/`, {
+        method: 'GET',
+        headers: {
+            "Content-Type" : "application/json",
+        },
+    })
+    .then(res => {return res.json()})
+    .then(data =>{
+        rate_element.textContent = rateText + data.review_ratio
+    })
+    
 }
 
 
@@ -36,6 +48,8 @@ function sendRate(rate){
 function setRate(){
     let rate_element = document.querySelector('#rate')
     const id = window.location.pathname[9]
+    const csrf_token = document.cookie.split('=')[1]
+
 
     fetch(`http://127.0.0.1:8000/api/games/${id}/`, {
         method: 'GET',
@@ -46,15 +60,31 @@ function setRate(){
     .then(res => {return res.json()})
     .then(data =>{
         console.log(data.review_ratio)
-        rate_element.textContent = rateText + data.review_ratio
+        if(!data.review_ratio){
+            rate_element.textContent = rateText + '0'
+            fetch(`http://127.0.0.1:8000/api/gamesreview`, {
+                method: 'POST',
+                headers: {
+                    "Content-Type" : "application/json",
+                    'X-CSRFToken': csrf_token
+                },
+                body: JSON.stringify({
+                    gameName: id,
+                    rate: 1
+                })
+            })
+            .then(res => console.log(res.json()))
+            .catch(err => console.log(err))
+        }
+        else{
+            rate_element.textContent = rateText + data.review_ratio
+        }
+
     })
     .catch(err => console.log(err))
     //.catch(console.log("Can't get reviews"))
 
 
-    if(rate_element.textContent.includes('undefined') || rate_element.textContent.includes('null')){
-        rate_element.textContent = rateText + '0'
-    }
 }
 
 
