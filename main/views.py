@@ -95,6 +95,8 @@ class GamesReviewListCreateAPIView(
     def get_queryset(self, *args, **kwargs):
         return GamesReview.objects.all().filter(owner=self.request.user)
 
+    def perform_create(self, serializer):
+        return serializer.save(owner=self.request.user)
 
     serializer_class = GameReviewSerializer
     #lookup_field = 'gameName'
