@@ -2,62 +2,10 @@ let icons = document.querySelectorAll('.star-icon')
 let star_col = document.querySelector('#stars')
 let icon_html = '<h1><i class="bi bi-star"></i></h1>'
 let fill_icon_html = '<h1><i class="bi bi-star-fill"></i></h1>'
+const rateText = 'Ocena: '
 
-
-// at load
-getRate()
-
-// reloading rate at interval
-document.addEventListener('DOMContentLoaded', updateRateLive)
-
-
-function getRate(){
-    const id = window.location.pathname[9]
-    let rate_element = document.querySelector('#rate')
-
-    fetch(`http://127.0.0.1:8000/api/games/${id}/`, {
-        method: 'GET',
-    })
-    .then(res => {
-        return res.json()
-    })
-    .then(data =>{
-        let rate = data.review_ratio
-        if(rate == null){ // TODO post jezeli nie istnieje gamereview
-            postRate(0)
-        }
-
-        rate_element.textContent += rate
-    })
-    .catch(err => console.log(err))
-}
-
-
-
-function resetIcons(icons){
-    for(let icon of icons){
-        icon.innerHTML = icon_html
-    }
-}
-
-// TODO
-function getAuthToken(){
-    const csrf_token = document.cookie.split('=')[1]
-    let credentials = {
-        username: 'michal',
-        password: 'michal'
-    }
-
-    fetch(`http://127.0.0.1:8000/api/auth/`, {
-        method: 'POST',
-        headers: {
-            'X-CSRFToken': csrf_token
-        },
-        body: credentials
-    })
-    .then(response => console.log(response))
-}
-
+// set 0 if no update
+setRate()
 
 
 function sendRate(rate){
@@ -84,49 +32,37 @@ function sendRate(rate){
 }
 
 
-function postRate(rate){
+
+function setRate(){
+    let rate_element = document.querySelector('#rate')
     const id = window.location.pathname[9]
-    const title = document.querySelector('#title')
-    const csrf_token = document.cookie.split('=')[1]
 
-
-    fetch(`http://127.0.0.1:8000/api/gamesreview`, {
-        method: 'POST',
+    fetch(`http://127.0.0.1:8000/api/games/${id}/`, {
+        method: 'GET',
         headers: {
             "Content-Type" : "application/json",
-            'X-CSRFToken': csrf_token
         },
-        body: JSON.stringify({
-            gameName: title,
-            rate: rate
-        })
     })
-    .then(res => {
-        return res.json()
+    .then(res => {return res.json()})
+    .then(data =>{
+        console.log(data.review_ratio)
+        rate_element.textContent = rateText + data.review_ratio
     })
     .catch(err => console.log(err))
+    //.catch(console.log("Can't get reviews"))
+
+
+    if(rate_element.textContent.includes('undefined') || rate_element.textContent.includes('null')){
+        rate_element.textContent = rateText + '0'
+    }
 }
 
 
-function updateRateLive(){
-    const id = window.location.pathname[9]
-    let rate_element = document.querySelector('#rate')
-
-    setInterval(() =>{
-        fetch(`http://127.0.0.1:8000/api/gamesreview/${id}/`, {
-            method: 'GET',
-        })
-        .then(res => {
-            return res.json()
-        })
-        .then(data =>{
-            let rate = data.rate
-            rate_element.textContent = 'Ocena: ' + rate
-        })
-        .catch(err => console.log(err))
-    }, 2000)
+function resetIcons(icons){
+    for(let icon of icons){
+        icon.innerHTML = icon_html
+    }
 }
-
 
 let rects = { // positions of stars
     left: icons[0].getBoundingClientRect().left,
