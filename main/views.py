@@ -1,7 +1,8 @@
 from django.shortcuts import render
 from django.views.generic import View, ListView, DetailView
 
-from rest_framework import generics, authentication, permissions
+from rest_framework import generics, permissions
+from rest_framework.permissions import IsAuthenticated
 from api.mixins import StaffEditorPermissionMixin
 #
 from .models import Games, GamesReview
@@ -91,6 +92,7 @@ class GamesReviewListCreateAPIView(
     generics.ListCreateAPIView,
     StaffEditorPermissionMixin,
 ):
+    permission_classes = [IsAuthenticated]
     def get_queryset(self, *args, **kwargs):
         return GamesReview.objects.all().filter(owner=self.request.user)
 
@@ -98,6 +100,7 @@ class GamesReviewListCreateAPIView(
         return serializer.save(owner=self.request.user)
 
     serializer_class = GameReviewSerializer
+
 
 class GamesReviewDeleteAPIView(
     generics.DestroyAPIView,
@@ -128,6 +131,8 @@ class GamesReviewUpdateAPIView(generics.UpdateAPIView,
 class GamesReviewDetailAPIView(generics.RetrieveAPIView,
                          StaffEditorPermissionMixin
                          ):
+
+    permission_classes = [IsAuthenticated]
 
     def get_queryset(self, *args, **kwargs):
         return GamesReview.objects.all().filter(owner=self.request.user)
