@@ -7,6 +7,8 @@ import json
 @api_view(['GET'])
 def api_home(request, *args, **kwargs):
     return Response({
+        'supported_apis_urls': {
         'games': reverse('main:games', request=request),
         'gamesreviews': reverse('main:gamesreview', request=request),
+        }
     })
