@@ -4,11 +4,18 @@ from django.core.validators import URLValidator
 from django.core.exceptions import ValidationError
 from .models import Games, GamesReview
 from .metadata import getMetaData
+from django.db.models import Avg
 
 
 @receiver(pre_save, sender=GamesReview)
 def games_review_pre_save(sender, instance, *args, **kwargs):
-    pass
+    try:
+        gameName = instance.gameName_id
+        ratio = GamesReview.objects.all().filter(gameName_id=gameName).aggregate(Avg('rate'))
+        Games.objects.filter(pk=gameName).update(reviewRatio=ratio.get('rate__avg'))
+    except Exception as e:
+        print('Error: game review avg counting failed.')
+        print(e)
 
 @receiver(post_save, sender=GamesReview)
 def games_review_post_save(sender, instance, created, *args, **kwargs):
