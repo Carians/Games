@@ -2,6 +2,7 @@ let icons = document.querySelectorAll('.star-icon')
 let star_col = document.querySelector('#stars')
 let icon_html = '<h1><i class="bi bi-star"></i></h1>'
 let fill_icon_html = '<h1><i class="bi bi-star-fill"></i></h1>'
+let website_url = 'http://' + window.location.host
 const rateText = 'Ocena: '
 
 // set 0 if no update
@@ -9,13 +10,13 @@ setRate()
 
 
 function sendRate(rate){
-    const id = window.location.pathname[9]
+    const id = window.location.pathname[9] + window.location.pathname[10]
     let rate_element = document.querySelector('#rate')
     
     const csrf_token = document.cookie.split('=')[1]
 
 
-    fetch(`http://127.0.0.1:8000/api/gamesreview/${id}/update`, {
+    fetch(`${website_url}/api/gamesreview/${id}/update`, {
         method: 'PUT',
         headers: {
             "Content-Type" : "application/json",
@@ -30,7 +31,7 @@ function sendRate(rate){
     })
     .catch(err => console.log(err))
 
-    fetch(`http://127.0.0.1:8000/api/games/${id}/`, {
+    fetch(`${website_url}/api/games/${id}/`, {
         method: 'GET',
         headers: {
             "Content-Type" : "application/json",
@@ -47,11 +48,11 @@ function sendRate(rate){
 
 function setRate(){
     let rate_element = document.querySelector('#rate')
-    const id = window.location.pathname[9]
+    const id = window.location.pathname[9] + window.location.pathname[10]
     const csrf_token = document.cookie.split('=')[1]
 
 
-    fetch(`http://127.0.0.1:8000/api/games/${id}/`, {
+    fetch(`${website_url}/api/games/${id}/`, {
         method: 'GET',
         headers: {
             "Content-Type" : "application/json",
@@ -62,7 +63,7 @@ function setRate(){
         console.log(data.review_ratio)
         if(!data.review_ratio){
             rate_element.textContent = rateText + '0'
-            fetch(`http://127.0.0.1:8000/api/gamesreview`, {
+            fetch(`${website_url}/api/gamesreview`, {
                 method: 'POST',
                 headers: {
                     "Content-Type" : "application/json",

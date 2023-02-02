@@ -37,6 +37,7 @@ class GameSerializer(serializers.ModelSerializer):
 
         model = Games
         fields = [
+            'pk',
             "title",
             "description",
             "text",
