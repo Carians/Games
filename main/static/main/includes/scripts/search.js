@@ -10,7 +10,6 @@ function search_func(){
         }
         else{
             item.classList.add('d-none')
-            console.log(item)
         }
     }
     
