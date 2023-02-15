@@ -3,13 +3,13 @@ const btn = document.querySelector('#send');
 let website_url = 'http://' + window.location.host;
 
 const loaderIcon = '<i class="fas fa-spinner fa-spin"></i>'; // ikona ładowania
+const errorIcon = '<i class="fas fa-exclamation-triangle"></i>'; // ikona błędu
 
 btn.addEventListener('click', ()=>{
     const csrf_token = document.cookie.split('=')[1];
 
     const game_title = form.children[1].value;
-    const email = form.children[3].value;
-    const url = form.children[5].value;
+    const url = form.children[3].value;
 
     btn.disabled = true; // blokowanie przycisku
     btn.innerHTML = `${loaderIcon} Wysyłanie...`; // zmiana tekstu przycisku na ikonę ładowania
@@ -30,14 +30,17 @@ btn.addEventListener('click', ()=>{
         // odblokuj przycisk i usuń ikonę ładowania po pomyślnym wykonaniu żądania POST
         if(res.status === 201) {
             btn.disabled = false;
-            btn.innerHTML = 'Wyślij';
+            btn.innerHTML = ' Wyślij';
             window.close();
+        } else {
+            btn.disabled = true;
+            btn.style.backgroundColor = 'red';
+            btn.innerHTML = `${errorIcon} Błąd`;
         }
     })
     .catch(err => {
         console.log(err);
         // odblokuj przycisk i usuń ikonę ładowania w przypadku błędu
         btn.disabled = false;
-        btn.innerHTML = 'Wyślij';
     });
 });
