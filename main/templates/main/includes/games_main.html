@@ -1,8 +1,7 @@
 
     <div class="scroll-bg d-grid gap-3">
-        <div class="scroll-div">
             {% for game in games %}
-                <div class="bg-secondary bg-gradient rounded-2 mb-3">
+                <div class="bg-gradient rounded-2 mb-3" style="background-color: #34383c">
                     <a href="{% url 'main:game_detail' game.pk %}" class="hovered text-white">
                         <div class="row">
                             <div class="col-lg-6 col-md-5 col-4">
