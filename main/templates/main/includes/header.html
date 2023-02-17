@@ -41,6 +41,25 @@ bg-dark rounded-bottom mb-3">
     </section>
   {% endif %}
 
+        {% if user.is_authenticated %}
+    <section>
+            <div class="dropdown">
+            <i class="bi bi-person-circle mt-xl-2 mt-md-1 mt-3" type="button" data-bs-toggle="dropdown" aria-expanded="false" style="font-size:3em"></i>
+            <ul class="dropdown-menu">
+                <li><a class="dropdown-item" href="/admin">
+                <i class="bi bi-person"></i>
+                Profil
+                </a></li>
+                <li><a class="dropdown-item" href="{% url 'main:logout' %}">
+                <i class="bi bi-box-arrow-right"></i>
+                Wyloguj się
+                </a></li>
+            </ul>
+            </div>
+    </section>
+        {% endif %}
+
+
 </header>
 
 

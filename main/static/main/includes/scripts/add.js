@@ -33,16 +33,14 @@ btn.addEventListener('click', ()=>{
             btn.disabled = false;
             btn.innerHTML = `${sendIcon} Dodaj grę`;
             window.close();
-        } else {
-            btn.disabled = true;
-            btn.style.backgroundColor = 'red';
-            btn.innerHTML = `${errorIcon} Błąd`;
         }
     })
     .catch(err => {
         console.log(err);
         // odblokuj przycisk i usuń ikonę ładowania w przypadku błędu
-        btn.disabled = false;
+        btn.disabled = true;
+        btn.style.backgroundColor = 'red';
+        btn.innerHTML = `${errorIcon} Błąd`;
     });
 });
 
