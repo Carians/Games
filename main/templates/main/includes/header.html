@@ -15,10 +15,20 @@ bg-dark rounded-bottom mb-3">
           <i class="bi bi-archive-fill"></i>
           Biblioteka
         </a></li>
-        <li><div class="dropdown-item" data-bs-toggle="modal" data-bs-target="#myModal">
-          <i class="bi bi-plus-circle-fill"></i>
-          Dodaj
-        </div></li>
+          {% if user.is_authenticated %}
+              <li><div class="dropdown-item" data-bs-toggle="modal" data-bs-target="#myModal">
+              <i class="bi bi-plus-circle-fill"></i>
+              Dodaj
+            </div></li>
+          {% endif %}
+          {% if not user.is_authenticated %}
+          <li>
+              <a class="dropdown-item" href="{% url 'main:login' %}">
+              <i class="bi-person"></i>
+              Zaloguj się
+              </a>
+          </li>
+      {% endif %}
       </ul>
     </div>
     <h2 class="p-4">Giercownia - your games database</h2>

@@ -15,4 +15,5 @@ urlpatterns = [
     path('api/gamesreview/<int:gameName>/update', views.GamesReviewUpdateAPIView.as_view(), name="gamesreview-update"),
     path('api/gamesreview/<int:gameName>/delete', views.GamesReviewDeleteAPIView.as_view(), name="gamesreview-delete"),
     path('api/gamesreview/<int:gameName>/', views.GamesReviewDetailAPIView.as_view(), name="gamesreview-detail"),
+    path('login', views.loginView.as_view(), name="login"),
 ]

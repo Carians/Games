@@ -129,11 +129,3 @@ star_col.addEventListener('mouseover', (e) =>{
 })
 
 
-
-// axios.get('/api/games', {
-// })
-// .then(function (response) {
-//     console.log(response);
-// })
-
-

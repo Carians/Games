@@ -1,6 +1,6 @@
 const form = document.querySelector('#addForm');
 const btn = document.querySelector('#send');
-let website_url = 'http://' + window.location.host;
+let website_url = 'https://' + window.location.host;
 
 const loaderIcon = '<i class="fas fa-spinner fa-spin"></i>'; // ikona ładowania
 const errorIcon = '<i class="fas fa-exclamation-triangle"></i>'; // ikona błędu

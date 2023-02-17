@@ -1,5 +1,14 @@
-from django.shortcuts import render
 from django.views.generic import View, ListView, DetailView
+from django.contrib.auth import authenticate, login, logout
+from django.shortcuts import render, redirect
+from django.urls import reverse_lazy
+from django.views.generic.edit import FormView, CreateView
+from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth import login
+from django.contrib.auth.forms import AuthenticationForm
+from django import forms
+
+
 
 from rest_framework import generics, permissions
 from rest_framework.permissions import IsAuthenticated
@@ -142,4 +151,26 @@ class GamesReviewDetailAPIView(generics.RetrieveAPIView,
     serializer_class = GameReviewSerializer
 
     lookup_field = 'gameName'
+
+class loginView(FormView):
+    template_name = 'main/login.html'
+    form_class = AuthenticationForm
+    success_url = reversed('main:homepage')
+    password = forms.CharField(label='Password', widget=forms.PasswordInput)
+    def form_valid(self, form):
+        username = form.cleaned_data.get('username')
+        password = form.cleaned_data.get('password')
+        user = authenticate(username=username, password=password)
+        if user is not None:
+            login(self.request, user)
+        return super().form_valid(form)
+
+    def get_success_url(self):
+        return reverse_lazy('main:homepage')
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['is_searchable'] = True
+        return context
+
 
