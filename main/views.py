@@ -1,9 +1,8 @@
 from django.views.generic import View, ListView, DetailView
-from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth import authenticate, logout
 from django.shortcuts import render, redirect
 from django.urls import reverse_lazy
-from django.views.generic.edit import FormView, CreateView
-from django.contrib.auth.forms import UserCreationForm
+from django.views.generic.edit import FormView
 from django.contrib.auth import login
 from django.contrib.auth.forms import AuthenticationForm
 from django import forms
@@ -165,7 +164,7 @@ class loginView(FormView):
             login(self.request, user)
         return super().form_valid(form)
 
-    def get_success_url(self):
+    def get_success_url(self):  # Redirect to a success page.
         return reverse_lazy('main:homepage')
 
 class logoutView(View):
