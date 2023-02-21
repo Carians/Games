@@ -26,12 +26,16 @@ btn.addEventListener('click', ()=>{
         })
     })
     .then(res => {
-        console.log(res.json());
+        //console.log(res.json());
         // odblokuj przycisk i usuń ikonę ładowania po pomyślnym wykonaniu żądania POST
         if(res.status === 201) {
             btn.disabled = false;
             btn.innerHTML = `${sendIcon}Dodaj grę`;
             window.close();
+        } else {
+            btn.disabled = true;
+            btn.style.backgroundColor = 'red';
+            btn.innerHTML = `${errorIcon} Błąd`;
         }
     })
     .catch(err => {
