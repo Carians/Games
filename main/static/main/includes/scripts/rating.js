@@ -2,7 +2,7 @@ let icons = document.querySelectorAll('.star-icon')
 let star_col = document.querySelector('#stars')
 let icon_html = '<h1><i class="bi bi-star"></i></h1>'
 let fill_icon_html = '<h1><i class="bi bi-star-fill"></i></h1>'
-let website_url = 'http://' + window.location.host
+let website_url = window.location.protocol +'//'+ window.location.host;
 const rateText = 'Ocena: '
 
 // set 0 if no update
