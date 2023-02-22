@@ -5,7 +5,6 @@ from django.core.exceptions import ValidationError
 from django.contrib import messages
 from .models import Games, GamesReview
 from .metadata import getMetaData
-from django.db.models import Avg
 
 
 @receiver(pre_save, sender=GamesReview)
