@@ -11,7 +11,7 @@ Follow this link [https://games.michalpilarski17.smallhost.pl] to get to the dem
 
 ## Authors
 
-- [@CarianS](https://github.com/Carians)
+- [@CarianS (Krzysztof Kasperek) ](https://github.com/Carians)
 - [@Michal-Pilarski](https://github.com/Michal-Pilarski)
 
 ## Run Locally
