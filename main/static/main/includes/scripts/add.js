@@ -47,6 +47,8 @@ btn.addEventListener('click', ()=>{
     });
 });
 
+//TODO: add popup animation to add.js
+//
 // function showPopup() {
 //         document.getElementById("popup").classList.add("show");
 //       }

@@ -5,7 +5,6 @@ from django.core.exceptions import ValidationError
 from django.contrib import messages
 from .models import Games, GamesReview
 from .metadata import getMetaData
-from django.db.models import Avg
 
 
 @receiver(pre_save, sender=GamesReview)
@@ -22,7 +21,7 @@ def games_pre_save(sender, instance, *args, **kwargs):
     try:
         #validator(str(instance.link))
         already_exists = Games.objects.all().filter(link=instance.link).exists()
-        print(already_exists)
+        #print(already_exists)
         if already_exists and instance.pk is None:
             raise ValidationError('This game already exists')
         if not str(instance.link).__contains__('store.steampowered.com'):
@@ -48,7 +47,7 @@ def games_pre_save(sender, instance, *args, **kwargs):
                 limit = 0
                 if '%' in instance.title:
                     position = instance.title.find('%')
-                    print(instance.title[position])
+                    #print(instance.title[position])
                     while instance.title[position-1].isdigit() and limit <= 100:
                         instance.title = instance.title.replace(instance.title[position-1], '')
                         position = instance.title.find('%')
