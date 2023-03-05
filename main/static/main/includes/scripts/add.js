@@ -32,6 +32,7 @@ btn.addEventListener('click', ()=>{
             btn.disabled = false;
             btn.innerHTML = `${sendIcon}Dodaj grę`;
             window.close();
+            window.location.reload()
         } else {
             btn.disabled = true;
             btn.style.backgroundColor = 'red';

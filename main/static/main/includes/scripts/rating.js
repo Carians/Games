@@ -1,22 +1,27 @@
+// Icons showing
 let icons = document.querySelectorAll('.star-icon')
 let star_col = document.querySelector('#stars')
 let icon_html = '<h1><i class="bi bi-star"></i></h1>'
 let fill_icon_html = '<h1><i class="bi bi-star-fill"></i></h1>'
-let website_url = window.location.protocol +'//'+ window.location.host;
 const rateText = 'Ocena: '
+
+// Rate sending
+let id = window.location.pathname[9]
+if(window.location.pathname[10]){
+    id += window.location.pathname[10]
+}
+
+let rate_element = document.querySelector('#rate')    
+const csrf_token = document.cookie.split('=')[1]
+let websiteUrl = window.location.protocol +'//'+ window.location.host;
 
 // set 0 if no update
 setRate()
 
 
 function sendRate(rate){
-    const id = window.location.pathname[9] + window.location.pathname[10]
-    let rate_element = document.querySelector('#rate')
-    
-    const csrf_token = document.cookie.split('=')[1]
-
-
-    fetch(`${website_url}/api/gamesreview/${id}/update`, {
+    console.log(id)
+    fetch(`${websiteUrl}/api/gamesreview/${id}/update`, {
         method: 'PUT',
         headers: {
             "Content-Type" : "application/json",
@@ -31,7 +36,7 @@ function sendRate(rate){
     })
     .catch(err => console.log(err))
 
-    fetch(`${website_url}/api/games/${id}/`, {
+    fetch(`${websiteUrl}/api/games/${id}/`, {
         method: 'GET',
         headers: {
             "Content-Type" : "application/json",
@@ -47,12 +52,7 @@ function sendRate(rate){
 
 
 function setRate(){
-    let rate_element = document.querySelector('#rate')
-    const id = window.location.pathname[9] + window.location.pathname[10]
-    const csrf_token = document.cookie.split('=')[1]
-
-
-    fetch(`${website_url}/api/games/${id}/`, {
+    fetch(`${websiteUrl}/api/games/${id}/`, {
         method: 'GET',
         headers: {
             "Content-Type" : "application/json",
@@ -63,7 +63,7 @@ function setRate(){
         console.log(data.review_ratio)
         if(!data.review_ratio){
             rate_element.textContent = rateText + '0'
-            fetch(`${website_url}/api/gamesreview`, {
+            fetch(`${websiteUrl}/api/gamesreview`, {
                 method: 'POST',
                 headers: {
                     "Content-Type" : "application/json",
