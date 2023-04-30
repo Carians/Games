@@ -36,14 +36,19 @@ def games_pre_save(sender, instance, *args, **kwargs):
                 instance.title = getMetaData.title(str(instance.link))
                 #Remove words from title instance
                 banned_words = [
-                    'on Steam',
+                    'on',
                     'Save',
                     'on',
                     'Pre-purchase',
+                    'Steam',
+                    'dsdasdas'
                          ]
-                for i in range(len(banned_words)):
-                    instance.title = instance.title.replace(banned_words[i], '')
-                #Remove save {ammount}%
+
+                split_title = instance.title.split()
+                filtered_title = [word for word in split_title if word not in banned_words]
+                instance.title = ' '.join(filtered_title)
+                    # instance.title = instance.title.replace(banned_words[i], '')
+                # Remove save {ammount}%
                 limit = 0
                 if '%' in instance.title:
                     position = instance.title.find('%')

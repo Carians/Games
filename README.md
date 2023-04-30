@@ -104,6 +104,6 @@ POST /login
 This endpoint logs the user into the application.
 ``` 
 ```
-GET /logout
+GET /logout 
 This endpoint logs the user out of the application.
 ``` 
